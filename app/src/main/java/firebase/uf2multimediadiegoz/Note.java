@@ -7,11 +7,16 @@ public class Note {
 
     private String title;
     private String description;
+    private String latitude;
+    private String longitude;
 
-    public Note(String title, String description) {
+    public Note(String title, String description, String latitude, String longitude) {
         this.title = title;
         this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
+    public Note(){ }
 
     public String getTitle() {
         return title;
@@ -27,5 +32,21 @@ public class Note {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 }
