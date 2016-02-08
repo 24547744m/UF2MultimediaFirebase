@@ -5,19 +5,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
-import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
-import com.firebase.client.ValueEventListener;
 
 /**
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
 
-    TextView tvMessage;
+    private static final String URL_FIREBASE = "https://uf2multimediadiegoz.firebaseio.com/";
+    private EditText etTitle;
+    private EditText etDescription;
 
     public MainActivityFragment() {
     }
@@ -25,28 +25,42 @@ public class MainActivityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        tvMessage = (TextView) rootView.findViewById(R.id.tvMessage);
+//        tvMessage = (TextView) rootView.findViewById(R.id.tvMessage);
         Firebase.setAndroidContext(getContext());
-        Firebase firebase = new Firebase("https://uf2multimediadiegoz.firebaseio.com/");
-        firebase.child("mensajeee").setValue("Hola Firebase");
+        final Firebase firebase = new Firebase(URL_FIREBASE);
 
-        Firebase alanRef = firebase.child("users").child("-K983VDi09Ikm0t358kR");
-        User alan = new User("Alan Turing", 1912);
-        //alanRef.setValue(alan);
+        final Firebase firebaseNote = firebase.child("notes");
 
-        alanRef.addValueEventListener(new ValueEventListener() {
+        etTitle = (EditText) rootView.findViewById(R.id.etTitle);
+        etDescription = (EditText) rootView.findViewById(R.id.etDescription);
+        Button buttAddNote = (Button) rootView.findViewById(R.id.buttAddNote);
+        buttAddNote.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                System.out.println(snapshot.getValue());
-                tvMessage.setText(snapshot.getValue().toString());
-            }
-            @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("The read failed: " + firebaseError.getMessage());
+            public void onClick(View v) {
+                //...
+                firebaseNote.push().setValue(new Note(etTitle.getText().toString(), etDescription.getText().toString()));
             }
         });
+
+//        alanRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot snapshot) {
+//                System.out.println(snapshot.getValue());
+////                tvMessage.setText(snapshot.getValue().toString());
+//            }
+//            @Override
+//            public void onCancelled(FirebaseError firebaseError) {
+//                System.out.println("The read failed: " + firebaseError.getMessage());
+//            }
+//        });
+
         return rootView;
 
     }
+
+
+
+
 }
