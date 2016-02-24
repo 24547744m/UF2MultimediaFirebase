@@ -9,12 +9,14 @@ public class Note {
     private String description;
     private String latitude;
     private String longitude;
+    private String urlImage;
 
-    public Note(String title, String description, String latitude, String longitude) {
+    public Note(String title, String description, String latitude, String longitude, String urlImage) {
         this.title = title;
         this.description = description;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.urlImage = urlImage;
     }
     public Note(){ }
 
@@ -48,5 +50,12 @@ public class Note {
 
     public void setLongitude(String longitude) {
         this.longitude = longitude;
+    }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
     }
 }
