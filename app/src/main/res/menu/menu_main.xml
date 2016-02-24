@@ -7,4 +7,9 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/makePicture"
+        android:title="Hacer una Foto"
+        android:orderInCategory="@android:integer/config_shortAnimTime"
+        />
 </menu>
